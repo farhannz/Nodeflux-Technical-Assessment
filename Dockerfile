@@ -4,17 +4,13 @@ ENV DEBIAN_FRONTEND=noninteractive
 ENV LANG C.UTF-8
 ENV LC_ALL C.UTF-8
 ENV TZ Asia/Jakarta
-
-
+# Boost library
 RUN apt-get -y update && \
     apt-get -y upgrade && \
     apt-get -y dist-upgrade && \
     apt-get -y autoremove && \
-    apt-get install -y build-essential gdb wget git libssl-dev clang-format
-
-
-# Boost library
-RUN mkdir ~/temp && cd ~/temp && \
+    apt-get install -y build-essential gdb wget git libssl-dev clang-format && \
+    mkdir ~/temp && cd ~/temp && \
     apt-get install -y cmake && \
     cd ~/temp &&  wget -q https://sourceforge.net/projects/boost/files/boost/1.81.0/boost_1_81_0.tar.gz && \
     tar -zxf boost_1_81_0.tar.gz && cd ~/temp/boost_1_81_0 && ./bootstrap.sh && ./b2 cxxflags="-std=c++11" --reconfigure --with-fiber --with-context --with-atomic --with-date_time --with-filesystem --with-url install && \
@@ -25,7 +21,8 @@ RUN mkdir ~/temp && cd ~/temp && \
     apt-get clean -y &&\
     rm -rf /var/lib/apt/lists/*
 # libpq
-RUN apt-get install -y libpq-dev libsqlite3-dev unzip && \
+RUN apt-get -y update && \
+    apt-get install -y libpq-dev libsqlite3-dev unzip && \
     cd ~/temp && \
     git clone https://github.com/jtv/libpqxx.git && cd libpqxx && \
     git checkout 7.7.4 && \
@@ -61,7 +58,8 @@ RUN cd ~/temp && \
     cd spdlog && mkdir build && cd build && \
     cmake .. && make -j
 
-RUN apt-get install -y python3-pip curl jq
+RUN apt-get update && \
+    apt-get install -y python3-pip curl jq
 
 RUN mkdir /app
 
@@ -69,7 +67,8 @@ COPY . /app
 
 WORKDIR /app
 
-RUN apt-get install -y libopencv-dev
+RUN apt-get update && \
+    apt-get install -y libopencv-dev
 
 RUN mkdir build && \
     cd build && \
