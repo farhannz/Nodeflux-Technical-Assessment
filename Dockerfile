@@ -79,9 +79,5 @@ ARG EXPOSE_PORT
 ENV PORT=$EXPOSE_PORT
 
 EXPOSE ${PORT}
-RUN ls
-
-RUN cd model && \
-    ls
 
 CMD ["./build/Nodeflux-Assessment"]
