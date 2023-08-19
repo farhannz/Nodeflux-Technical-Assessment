@@ -1,5 +1,5 @@
 # C++ Software Engineer - Nodeflux Technical Assessment
-[![Docker Image CI](https://github.com/farhannz/Nodeflux-Technical-Assessment/actions/workflows/docker-image.yml/badge.svg)](https://github.com/farhannz/Nodeflux-Technical-Assessment/actions/workflows/docker-image.yml)
+[![Docker Image CI](https://github.com/farhannz/Nodeflux-Technical-Assessment/actions/workflows/docker-image.yml/badge.svg)](https://github.com/farhannz/Nodeflux-Technical-Assessment/actions/workflows/docker-image.yml) [![Ubuntu CMake](https://github.com/farhannz/Nodeflux-Technical-Assessment/actions/workflows/cmake-build.yml/badge.svg)](https://github.com/farhannz/Nodeflux-Technical-Assessment/actions/workflows/cmake-build.yml)
 ## About
 ---
 Technical Assessment Application.
