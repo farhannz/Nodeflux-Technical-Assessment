@@ -41,8 +41,8 @@ to the desired target dimension.
 
 ### Build with Docker
 
-*Requirements:   
-Docker
+* Requirements:   
+[Docker](https://www.docker.com/get-started/)
 1. Clone this repository
     ```
     git clone --recursive https://github.com/farhannz/Nodeflux-Technical-Assessment.git
@@ -64,7 +64,7 @@ Docker
     -e FNZ_SERVER_PORT=${FNZ_SERVER_PORT} \
     -p ${FNZ_SERVER_PORT}:${FNZ_SERVER_PORT} Nodeflux-Technical-Assessment:v1.0
     ```
-5. The webservice will run at FNZ_SERVER_HOST:FNZ_SERVER_PORT, in this example at 127.0.0.1:4004
+5. The server will run at FNZ_SERVER_HOST:FNZ_SERVER_PORT, in this example at 127.0.0.1:4004
 
 ## Endpoints
 ---
