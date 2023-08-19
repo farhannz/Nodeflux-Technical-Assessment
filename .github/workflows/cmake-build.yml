@@ -24,6 +24,64 @@ jobs:
       with:
         submodules: 'recursive'
 
+    - name: Install Boost
+      run: |
+            sudo apt-get install -y build-essential gdb wget git libssl-dev clang-format && \
+            mkdir ~/temp && cd ~/temp && \
+            sudo apt-get install -y cmake && \
+            cd ~/temp &&  wget -q https://sourceforge.net/projects/boost/files/boost/1.81.0/boost_1_81_0.tar.gz && \
+            tar -zxf boost_1_81_0.tar.gz && cd ~/temp/boost_1_81_0 && ./bootstrap.sh && sudo bash -c "./b2 cxxflags="-std=c++11" --reconfigure --with-fiber --with-context --with-atomic --with-date_time --with-filesystem --with-url install" && \
+            cd ~/temp && git clone -b v1.15 https://github.com/linux-test-project/lcov.git && cd lcov && make install && cd .. && \
+            sudo apt-get install -y libperlio-gzip-perl libjson-perl && \
+            rm -rf ~/temp/* && \
+            apt-get autoremove -y &&\
+            apt-get clean -y &&\
+            rm -rf /var/lib/apt/lists/*
+    
+    - name: install libpq
+      run : |
+            apt-get install -y libpq-dev libsqlite3-dev unzip && \
+            cd ~/temp && \
+            git clone https://github.com/jtv/libpqxx.git && cd libpqxx && \
+            git checkout 7.7.4 && \
+            mkdir build && cd build && \
+            cmake .. -DPostgreSQL_TYPE_INCLUDE_DIR=/usr/include/postgresql/libpq && \
+            make -j6 && make install && \
+            cd ~/temp && \
+            wget https://github.com/SOCI/soci/archive/refs/heads/master.zip && \
+            unzip master.zip && \
+            cd soci-master && \
+            mkdir build && cd build && \
+            cmake .. -DWITH_BOOST=ON -DWITH_POSTGRESQL=ON -DWITH_SQLITE3=ON -DCMAKE_CXX_STANDARD=14 -DSOCI_CXX11=ON && \
+            make -j6 && make install && \
+            # cp /usr/local/cmake/SOCI.cmake /usr/local/cmake/SOCIConfig.cmake && \
+            ln -s /usr/local/lib64/libsoci_* /usr/local/lib && ldconfig && \
+            rm -rf ~/temp/* && \
+            apt-get autoremove -y &&\
+            apt-get clean -y &&\
+              rm -rf /var/lib/apt/lists/*
+
+    - name: Install Libasyik
+      run : |
+            cd ~/temp  && \
+            git clone https://github.com/okyfirmansyah/libasyik && \
+            cd ~/temp/libasyik && \
+            git submodule update --init --recursive && \
+            mkdir build && \
+            cd build && \
+            cmake .. && \
+            make -j4 && \
+            make install
+    - name: Install spdlog
+      run : |
+            cd ~/temp && \
+            git clone https://github.com/gabime/spdlog.git && \
+            cd spdlog && mkdir build && cd build && \
+            cmake .. && make -j && make install
+
+    - name: Install OpenCV
+      run: sudo apt-get install -y libopencv-dev
+
     - name: Configure CMake
       # Configure CMake in a 'build' subdirectory. `CMAKE_BUILD_TYPE` is only required if you are using a single-configuration generator such as make.
       # See https://cmake.org/cmake/help/latest/variable/CMAKE_BUILD_TYPE.html?highlight=cmake_build_type
