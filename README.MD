@@ -1,5 +1,5 @@
 # C++ Software Engineer - Nodeflux Technical Assessment
-
+[![Docker Image CI](https://github.com/farhannz/Nodeflux-Technical-Assessment/actions/workflows/docker-image.yml/badge.svg)](https://github.com/farhannz/Nodeflux-Technical-Assessment/actions/workflows/docker-image.yml)
 ## About
 ---
 Technical Assessment Application.

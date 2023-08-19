@@ -56,7 +56,7 @@ RUN cd ~/temp  && \
 RUN cd ~/temp && \
     git clone https://github.com/gabime/spdlog.git && \
     cd spdlog && mkdir build && cd build && \
-    cmake .. && make -j
+    cmake .. && make -j && make install
 
 RUN apt-get update && \
     apt-get install -y python3-pip curl jq
