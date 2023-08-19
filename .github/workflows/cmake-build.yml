@@ -34,7 +34,7 @@ jobs:
     
     - name: install libpq
       run : |
-            apt-get install -y libpq-dev libsqlite3-dev unzip && \
+            sudo apt-get install -y libpq-dev libsqlite3-dev unzip && \
             cd ~/temp && \
             git clone https://github.com/jtv/libpqxx.git && cd libpqxx && \
             git checkout 7.7.4 && \
