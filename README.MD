@@ -11,6 +11,12 @@ to the desired target dimension.
 ---
 
 ### Build from Source
+
+* Requirements:   
+[OpenCV](https://opencv.org/get-started/)   
+[Libasyik](https://github.com/okyfirmansyah/libasyik)   
+[spdlog](https://github.com/gabime/spdlog)
+
 1. Clone this repository
     ```
     git clone --recursive https://github.com/farhannz/Nodeflux-Technical-Assessment.git
@@ -34,6 +40,9 @@ to the desired target dimension.
 
 
 ### Build with Docker
+
+*Requirements:   
+Docker
 1. Clone this repository
     ```
     git clone --recursive https://github.com/farhannz/Nodeflux-Technical-Assessment.git

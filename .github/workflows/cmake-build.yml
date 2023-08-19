@@ -31,35 +31,33 @@ jobs:
             sudo apt-get install -y cmake && \
             cd ~/temp &&  wget -q https://sourceforge.net/projects/boost/files/boost/1.81.0/boost_1_81_0.tar.gz && \
             tar -zxf boost_1_81_0.tar.gz && cd ~/temp/boost_1_81_0 && ./bootstrap.sh && sudo bash -c "./b2 cxxflags="-std=c++11" --reconfigure --with-fiber --with-context --with-atomic --with-date_time --with-filesystem --with-url install" && \
-            cd ~/temp && git clone -b v1.15 https://github.com/linux-test-project/lcov.git && cd lcov && make install && cd .. && \
+            cd ~/temp && git clone -b v1.15 https://github.com/linux-test-project/lcov.git && cd lcov && sudo make install && cd .. && \
             sudo apt-get install -y libperlio-gzip-perl libjson-perl && \
             rm -rf ~/temp/* && \
-            apt-get autoremove -y &&\
-            apt-get clean -y &&\
-            rm -rf /var/lib/apt/lists/*
+            sudo apt-get autoremove -y &&\
+            sudo apt-get clean -y &&\
     
     - name: install libpq
       run : |
-            apt-get install -y libpq-dev libsqlite3-dev unzip && \
+            sudo apt-get install -y libpq-dev libsqlite3-dev unzip && \
             cd ~/temp && \
             git clone https://github.com/jtv/libpqxx.git && cd libpqxx && \
             git checkout 7.7.4 && \
             mkdir build && cd build && \
             cmake .. -DPostgreSQL_TYPE_INCLUDE_DIR=/usr/include/postgresql/libpq && \
-            make -j6 && make install && \
+            make -j6 && sudo make install && \
             cd ~/temp && \
             wget https://github.com/SOCI/soci/archive/refs/heads/master.zip && \
             unzip master.zip && \
             cd soci-master && \
             mkdir build && cd build && \
             cmake .. -DWITH_BOOST=ON -DWITH_POSTGRESQL=ON -DWITH_SQLITE3=ON -DCMAKE_CXX_STANDARD=14 -DSOCI_CXX11=ON && \
-            make -j6 && make install && \
+            make -j6 && sudo make install && \
             # cp /usr/local/cmake/SOCI.cmake /usr/local/cmake/SOCIConfig.cmake && \
-            ln -s /usr/local/lib64/libsoci_* /usr/local/lib && ldconfig && \
-            rm -rf ~/temp/* && \
-            apt-get autoremove -y &&\
-            apt-get clean -y &&\
-              rm -rf /var/lib/apt/lists/*
+            sudo ln -s /usr/local/lib64/libsoci_* /usr/local/lib && ldconfig && \
+            sudo rm -rf ~/temp/* && \
+            sudo apt-get autoremove -y &&\
+            sudo apt-get clean -y &&\
 
     - name: Install Libasyik
       run : |
@@ -71,13 +69,13 @@ jobs:
             cd build && \
             cmake .. && \
             make -j4 && \
-            make install
+            sudo make install
     - name: Install spdlog
       run : |
             cd ~/temp && \
             git clone https://github.com/gabime/spdlog.git && \
             cd spdlog && mkdir build && cd build && \
-            cmake .. && make -j && make install
+            cmake .. && make -j && sudo make install
 
     - name: Install OpenCV
       run: sudo apt-get install -y libopencv-dev
